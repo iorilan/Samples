@@ -1,0 +1,44 @@
+ <script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+ 
+
+ <img src="GetImage.png" id="imgIc" draggable="false"/>
+ <canvas id="canvasIcPhoto" height="400px"></canvas>
+ 
+<script>
+
+ 
+var c = document.getElementById("canvasIcPhoto");
+var ctx=c.getContext("2d");
+
+
+
+var x1,y1,x2,y2;	
+$("#imgIc").mousemove(function(e){
+	//console.log("mouse over:");
+   // console.log("X:" + e.offsetX +", Y:" + e.offsetY);
+});
+
+
+$("#imgIc").mousedown(function(e){
+	x1 = e.offsetX;
+	y1 = e.offsetY;
+});
+
+$("#imgIc").mouseup(function(e){
+	x2 = e.offsetX;
+	y2 = e.offsetY;
+	
+	console.log("x1,y1,x2,y2:"+x1+","+y1+","+x2+","+y2);
+	var width = x2-x1;
+	var height = y2-y1;
+	
+	ctx.clearRect(0, 0, canvasIcPhoto.width, canvasIcPhoto.height);
+	ctx.drawImage(imgIc,x1,y1,width,height,0,0,width,height);
+});
+
+//
+						
+</script>

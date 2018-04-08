@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Activities.ResultActivity">
+
+    <TextView
+        android:id="@+id/textviewTicketNo"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+
+        android:textColor="#25383C"
+        android:textSize="17sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/tv_status"
+        android:layout_alignEnd="@+id/tv_status" />
+
+    <EditText
+        android:id="@+id/txtTicketScanningInfo"
+        android:layout_above="@id/textviewTicketNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textSize="8sp"
+        android:cursorVisible="false"
+        android:background="@android:color/transparent"
+        />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textviewTicketNo"
+        android:textColor="#25383C"
+        android:textSize="17sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/tv_status"
+        android:layout_alignEnd="@+id/tv_status" />
+
+
+    <TextView
+        android:id="@+id/tv_err"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_alignBottom="@+id/tv_status"
+        android:layout_alignRight="@+id/station1"
+        android:layout_alignEnd="@+id/station1" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:gravity="center"
+        android:background="#F07D00"
+        android:textSize="20sp"
+        android:layout_above="@+id/btnDismissError"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:autoText="true" />
+
+    <TextView
+        android:id="@+id/station1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="STATION1"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_below="@+id/btnDismissError"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp"
+        android:layout_alignParentTop="false" />
+    <TextView
+        android:id="@+id/station2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="STATION2"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_below="@+id/station1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp" />
+
+
+    <TextView
+        android:id="@+id/station3"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="STATION3"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_below="@+id/station2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp" />
+    <TextView
+        android:id="@+id/station4"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="STATION4"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_below="@+id/station3"
+        android:layout_centerHorizontal="true" />
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:id="@+id/btnLogout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView1"
+        android:layout_above="@+id/station2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:layout_above="@+id/station3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:layout_above="@+id/station4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView4"
+        android:layout_alignTop="@+id/station4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/total"
+        android:layout_alignRight="@+id/textviewTicketNo"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset Counter"
+        android:id="@+id/clear"
+        android:layout_above="@+id/station1"
+        android:layout_alignRight="@+id/station1"
+        android:layout_alignEnd="@+id/station1" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dismiss"
+        android:id="@+id/btnDismissError"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Analysis"
+        android:id="@+id/btnAnalysis"
+        android:layout_above="@+id/station1"
+        android:layout_toRightOf="@+id/btnLogout"
+        android:layout_toEndOf="@+id/btnLogout" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel Usage"
+        android:id="@+id/btnCancelUsage"
+        android:layout_alignTop="@+id/btnLogout"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manual"
+        android:id="@+id/btnManual"
+        android:layout_alignTop="@+id/btnCancelUsage"
+        android:layout_alignRight="@+id/station4"
+        android:layout_alignEnd="@+id/station4" />
+
+
+</RelativeLayout>

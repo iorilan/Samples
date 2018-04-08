@@ -1,0 +1,5 @@
+E:\Demo\c++Lab1\TestProject1\bin\Debug\TestProject1.dll
+E:\Demo\c++Lab1\TestProject1\bin\Debug\TestProject1.pdb
+E:\Demo\c++Lab1\TestProject1\obj\Debug\ResolveAssemblyReference.cache
+E:\Demo\c++Lab1\TestProject1\obj\Debug\TestProject1.dll
+E:\Demo\c++Lab1\TestProject1\obj\Debug\TestProject1.pdb

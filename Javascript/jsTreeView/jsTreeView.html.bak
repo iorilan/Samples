@@ -1,0 +1,67 @@
+<html>
+<head>
+<script src="jquery-1.6.js"></script>
+<script type="text/javascript">
+$(document).ready(
+function(){
+
+$("li:not(:has(ul))").css("list-style-image","close.png");
+
+$("li:has(ul)").click(function(e){
+if(this == e.target){
+
+if($(this).children().is(":hidden")){
+
+$(this).css("list-style-image","url(close.png)")
+.children().show();
+}else {
+
+$(this).css("list-style-image","url(extend.png)")
+.children().hide();
+	}
+}
+return false;
+}).click();
+
+
+}
+);
+
+</script>
+</head>
+<body>
+<div>
+<ul>
+<li>parentItem1
+	<ul>
+	<li>childItem1.1
+		<ul>
+		<li>childItem1.1.1</li>
+		<li>childItem1.1.2</li>
+		<li>childItem1.1.3</li>
+		<li>childItem1.1.4</li>
+		</ul>
+	</li>
+	<li>childItem1.2
+		<ul>
+		<li>childItem1.2.1</li>
+		<li>childItem1.2.2</li>
+		<li>childItem1.2.3</li>
+		</ul>
+	</li>
+	<li>childItem1.3</li>
+	</ul>
+</li>
+<li>parentItem2
+		<ul>
+		<li>childItem2.1</li>
+		<li>childItem2.2</li>
+		</ul>
+</li>
+<li>parentItem3</li>
+<li>parentItem4</li>
+</ul>
+</div>
+
+</body>
+</html>

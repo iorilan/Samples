@@ -1,0 +1,46 @@
+﻿//1.html
+<input type="file" name="image" accept="image/*" id="fileChoosed">    
+<canvas id="canvasFile" style="margin-top:15px;" width="500" height="400"></canvas>
+
+//2.javascript 
+
+var photoW = 400;
+        var photoH = 300;
+        var photo;
+        $(document).ready(function() {
+
+		// show image preview after selection
+            $("#fileChoosed").change(function picChange(evt) {
+                //get files captured through input
+                var fileInput = evt.target.files;
+                if (fileInput.length > 0) {
+                    //window url
+                    var windowURL = window.URL || window.webkitURL;
+                    //picture url
+                    var picURL = windowURL.createObjectURL(fileInput[0]);
+                    //get canvas
+                    var photoCanvas = document.getElementById("canvasFile");
+                    var ctx = photoCanvas.getContext("2d");
+
+                    //create image
+                    photo = new Image();
+
+                    photo.onload = function() {
+                        //draw photo into canvas when ready
+                        ctx.drawImage(photo, 0, 0, photoW, photoH);
+                    };
+
+                    //load photo into canvas
+                    photo.src = picURL;
+
+                    var arr = picURL.split('/');
+                    var imgUrl = arr[arr.length - 1];
+                    windowURL.revokeObjectURL(imgUrl);
+
+                }
+            });
+        });
+
+		
+	
+

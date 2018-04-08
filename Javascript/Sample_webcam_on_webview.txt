@@ -1,0 +1,193 @@
+﻿//1. html
+	
+	
+	<div id="pnlVideo1">
+                            <input type="hidden" name="imgNric1" id="imgNric1" />
+                            <label id="nric" class="control-label labelfont" style="color:#888;font-weight:bold;">Picture of Asset</label><br /><br />
+                            <button id="btnOpen1" class="btn btn-default" type="button">Open WebCam</button>
+                            <select id="videoSource" style="display:none">
+                                
+                            </select>
+                            <div id="vdoOne" style="display:none;">
+                                <video id="video" style="margin-top:15px;margin-bottom:15px;" width="300" autoplay></video>
+                                <canvas id="canvasPreview" style="margin-top:15px;" width="300" height="224"></canvas>
+                                <canvas id="canvasUpload" style="display:none;" width='300' height='224'></canvas>
+                                <button id="snap" class="btn btn-default" type="button">Snap Photo</button>
+                            </div>
+                        </div>
+                       
+                        
+
+//2. javascript
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+        });
+
+        //// Elements for taking the snapshot
+        var canvasPreview = document.getElementById('canvasPreview');
+        var canvasUpload = document.getElementById('canvasUpload');
+        var contextPreview = canvasPreview.getContext('2d');
+        var contextUpload = canvasUpload.getContext('2d');
+
+
+
+        //#################### Video Source #######################
+        var videoElement = document.querySelector('video');
+        var videoSelect = document.querySelector('select#videoSource');
+
+        navigator.mediaDevices.enumerateDevices()
+            .then(gotDevices).then(getStream).catch(handleError);
+
+        videoSelect.onchange = getStream;
+
+        function gotDevices(deviceInfos) {
+            for (var i = 0; i !== deviceInfos.length; ++i) {
+                var deviceInfo = deviceInfos[i];
+                var option = document.createElement('option');
+                option.value = deviceInfo.deviceId;
+               if (deviceInfo.kind === 'videoinput') {
+                    option.text = deviceInfo.label || 'camera ' +
+                        (videoSelect.length + 1);
+                    videoSelect.appendChild(option);
+                } else {
+                    console.log('Found ome other kind of source/device: ', deviceInfo);
+                }
+            }
+        }
+
+        function getStream() {
+            if (window.stream) {
+                window.stream.getTracks().forEach(function (track) {
+                    track.stop();
+                });
+            }
+
+            var constraints = {
+                
+                video: {
+                    optional: [{
+                        sourceId: videoSelect.value
+                    }]
+                }
+            };
+
+            navigator.mediaDevices.getUserMedia(constraints).
+                then(gotStream).catch(handleError);
+        }
+
+        function gotStream(stream) {
+            window.stream = stream; // make stream available to console
+            videoElement.srcObject = stream;
+        }
+
+        function handleError(error) {
+            console.log('Error: ', error);
+        }
+
+        //######################## End Video Source #################
+
+
+        // Get access to the camera!
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+                videoElement.src = window.URL.createObjectURL(stream);
+                videoElement.play();
+
+            });
+        }
+        else {
+            document.getElementById("pnlVideo1").style.display = "none";
+        }
+
+
+      
+
+
+        //// Trigger photo take
+        document.getElementById("snap").addEventListener("click", function () {
+            contextPreview.drawImage(videoElement, 0, 0, 300, 224);
+            contextUpload.drawImage(videoElement, 0, 0, 300, 224);
+            document.getElementById("video").style.display = "none";
+            document.getElementById("snap").style.display = "none";
+            document.getElementById("canvasPreview").style.display = "block";
+
+            var image = document.getElementById("canvasUpload").toDataURL("image/jpeg");
+            image = image.replace('data:image/jpeg;base64,', '');
+            $("#imgNric1").val(image);
+        });
+
+        //// Trigger photo take
+
+
+        document.getElementById("btnOpen1").addEventListener("click", function () {
+            document.getElementById("vdoOne").style.display = "block";
+            document.getElementById("video").style.display = "block";
+            document.getElementById("snap").style.display = "block";
+            document.getElementById("canvasPreview").style.display = "none";
+        });
+
+
+</script>
+
+
+// if you are using android webview :
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="bme">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/sgh"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+
+        android:hardwareAccelerated="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"></activity>
+    </application>
+
+</manifest>
+
+
+
+
+...
+ mWebView = (AdvancedWebView) findViewById(R.id.webview);
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setAllowFileAccess(true);
+...

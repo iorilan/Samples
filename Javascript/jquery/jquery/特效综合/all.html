@@ -1,0 +1,518 @@
+<html>
+<head>
+<script src="jquery-1.6.js"></script>
+<style type="text/css">
+
+/*
+Ãæ°åÕÛµşĞ§¹û
+*/
+.accordion2 {
+	width: 480px;
+	border-bottom: solid 1px #c4c4c4;
+}
+.accordion2 h3 {
+	background: #e9e7e7 url(images/arrow-square.gif) no-repeat right -51px;
+	padding: 7px 15px;
+	margin: 0;
+	font: bold 120%/100% Arial, Helvetica, sans-serif;
+	border: solid 1px #c4c4c4;
+	border-bottom: none;
+	cursor: pointer;
+}
+.accordion2 h3:hover {
+	background-color: #e3e2e2;
+}
+.accordion2 h3.active {
+	background-position: right 5px;
+}
+.ctn{
+background:#f1f1f1;
+width:480px;
+height:400px;
+overflow-y:auto;
+display:none;
+}
+
+/*
+¶¯Ì¬ĞüÍ£
+*/
+.menu {
+	margin: 100px 0 0;
+	padding: 0;
+	list-style: none;
+}
+.menu li {
+	padding: 0;
+	margin: 0 2px;
+	float: left;
+	position: relative;
+	text-align: center;
+}
+.menu a {
+	padding: 14px 10px;
+	display: block;
+	color: #000000;
+	width: 144px;
+	text-decoration: none;
+	font-weight: bold;
+	background-color:#e3e3e3 ;
+}
+.menu li em {
+	background-color:#656565 ;
+	width: 180px;
+	height: 45px;
+	position: absolute;
+	top: -85px;
+	left: -15px;
+	text-align: center;
+	padding: 20px 12px 10px;
+	font-style: normal;
+	z-index: 2;
+	display: none;
+}
+
+/*
+Ãæ°åÏÂ»¬
+*/
+
+a:focus {
+	outline: none;
+}
+#panel {
+	background: #e2e2e2;
+	height: 200px;
+	width:600px;
+	overflow-y:scroll;
+	display: none;
+}
+.slide {
+	margin: 0;
+	padding: 0;
+	border-top: solid 4px #e2e2e2;
+	background-color: #ffffff;
+	width:600px;
+}
+.btn-slide {
+	background-color: #333333;
+	text-align: center;
+	width: 144px;
+	height: 31px;
+	padding: 10px 10px 0 0;
+	margin: 0 auto;
+	display: block;
+	font: bold 120%/100% Arial, Helvetica, sans-serif;
+	color: #fff;
+	text-decoration: none;
+	margin-left:230px;
+}
+.active {
+	background-position: right 12px;
+}
+
+/*
+Ãæ°åÖğ½¥ÏûÊ§
+*/
+
+h3 {
+	margin: 0;
+	padding: 0 0 .3em;
+}
+p {
+	margin: 0;
+	padding: 0 0 .5em;
+}
+.pane {
+	background: #edf5e1;
+	padding: 10px 20px 10px;
+	position: relative;
+	border-top: solid 2px #c4df9b;
+}
+.pane .delete {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+	width:40px;
+	height:20px;
+	text-align:center;
+	background-color:#e3e3e3
+}
+
+/*
+ºĞ×ÓÌØĞ§
+*/
+#box {
+	background: #6699FF;
+	height: 100px;
+	width: 100px;
+	position: relative;
+}
+
+/*
+ÕÛµşÏÔÊ¾¸öÈË×ÊÁÏ
+*/
+
+.message_list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 383px;
+}
+.message_list li {
+	padding: 0;
+	margin: 0;
+	background-color:#666666 ;
+	border:1px solid #cccccc;
+}
+.message_head {
+	padding: 5px 10px;
+	cursor: pointer;
+	position: relative;
+}
+.message_head .timestamp {
+	color: #ffffff;
+	font-size: 95%;
+	position: absolute;
+	right: 10px;
+	top: 5px;
+}
+.message_head cite {
+	font-size: 100%;
+	font-weight: bold;
+	font-style: normal;
+}
+.message_body {
+	padding: 5px 10px 15px;
+	background-color:#e2e2e2;
+}
+.collapse_buttons {
+	text-align: right;
+	border-top: solid 1px #e4e4e4;
+	padding: 5px 0;
+	width: 383px;
+}
+.collapse_buttons a {
+	margin-left: 15px;
+	float: right;
+}
+.show_all_message {
+	background-color: #e2e2e2;
+	padding-right: 12px;
+}
+
+.collpase_all_message {
+	background-color: #e4e4e4;
+	padding-right: 12px;
+	color: #666666;
+}
+
+/*
+ÏÔÊ¾Õû¿éÁ¬½Ó
+*/
+a:visited {
+	color: #ffffff;
+}
+a:hover {
+	color: #333300;
+	text-decoration: underline;
+}
+.pane-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.pane-list li {
+	background: #e2e2e2;
+	padding: 10px 20px 10px;
+	border-top: solid 1px #c4df9b;
+	cursor: pointer;
+}
+.pane-list li:hover {
+	background: #939393;
+}
+
+</style>
+</head>
+<body>
+
+<!--
+Ãæ°åÕÛµş
+-->
+<h2>Ãæ°åÕÛµşĞ§¹û</h2>
+<div class="ctn">321<br/>321<br/>321<br/>321<br/>321<br/>321<br/>321<br/>321<br/>321<br/>321<br/>321<br/>321<br/>321<br/></div>
+
+<div class="accordion2" id="pnl">
+	<h3>ÂÛÎÄ´úĞ´</h3>
+	<div class="ctn">±¾Õ¾´úĞ´ÂÛÎÄ<br /></div>
+	<h3>ÍøÕ¾¿ª·¢</h3>
+	<div class="ctn">×¨ÒµÖÆ×÷¸÷ÖÖÍøÕ¾<br /></div>
+	<h3>ÆóÒµÓ¦ÓÃ¿ª·¢</h3>
+	<div class="ctn">
+	<p>ÎªÆóÒµ¶¨ÖÆ¸÷ÖÖÏµÍ³</p>
+	<ul>
+	<li>²ÆÎñÈí¼ş</li>
+	<li>½øÏú´æÏµÍ³</li>
+	<li>ÈËÊÂÏµÍ³</li>
+	<li>OA</li>
+	<li>ÂÛÌ³</li>
+	</ul>
+	</div>
+	<h3>ÒÆ¶¯Ó¦ÓÃ¿ª·¢</h3>
+	<div class="ctn">ÊÖ»úÓ¦ÓÃÑĞ·¢<br /></div>
+	<h3>½Å±¾±àĞ´</h3>
+	<div class="ctn">´úĞ´¸÷ÖÖÍøÒ³½Å±¾£¬JS/PHPµÈ<br/></div>
+</div>
+
+<!--
+¶¯Ì¬ĞüÍ£
+-->
+
+<h2>¶¯Ì¬ĞüÍ£Ğ§¹û</h2>
+
+<ul class="menu">
+	<li>
+		<a href="http://www.hl-workroom.com" target="blank">ÍøÕ¾¿ª·¢</a>		
+		<em>ÒÔÆóÒµ·¢Õ¹Îªµ¼Ïò£¬×¨Òµ¶¨ÖÆÍøÕ¾</em>
+	</li>
+	<li>
+		<a href="http://www.hl-workroom.com" target="blank">¶©¹º±ÏÒµÉè¼Æ£¬ÂÛÎÄ</a>		
+		<em>Ñ§ÉúµÄºÃ°ïÊÖ</em>
+	</li>
+	<li>
+		<a href="http://www.hl-workroom.com" target="blank">ÒÆ¶¯Ó¦ÓÃ¶¨ÖÆ</a>		
+		<em>ÒÔ¿Í»§ÎªºËĞÄ£¬¶¨ÖÆÓ¦ÓÃÈí¼ş</em>
+	</li>
+</ul>
+<br /><br /><br /><br /><br /><br /><br /><br />
+<!--
+Ãæ°åÏÂ»¬
+-->
+
+<h2>Ãæ°åÏÂÀ­Ğ§¹û</h2>
+
+<div id="panel">
+ÕâÀïĞ´ÄÚÈİ<br/>
+</div>
+<p class="slide"><a href="#" class="btn-slide">²ì¿´ÏêÏ¸</a></p>
+
+<!--
+Ãæ°åÖğ½¥ÏûÊ§
+-->
+
+<h2>Ãæ°åÖğ½¥ÏûÊ§Ğ§¹û</h2>
+
+<div class="pane">
+	<h3>ÒÔÆóÒµ¼Æ»®ÎªºËĞÄµÄÍøÕ¾ÖÆ×÷</h3>
+	<p>ÎªÆóÒµÖÆ×÷Õ¾µã</p>
+	<div alt="delete" class="delete" >¹Ø±Õ</div>
+</div>
+<div class="pane">
+	<h3>Èí¼ş¿ª·¢</h3>
+	<p>ÎÒÃÇµÄÄ¿±êÊÇÖÆ×÷¸üÊµÓÃ¡¢¸üÌùĞÄµÄÈí¼ş</p>
+		<div alt="delete" class="delete" >¹Ø±Õ</div>
+</div>
+<div class="pane">
+	<h3>Êı¾İ¿âÓªÏú</h3>
+	<p>ÎªÆóÒµÊı¾İÌá¹©±¸·İ¡¢·Ö²¼Ê½´æ´¢²ßÂÔ</p>
+		<div alt="delete" class="delete" >¹Ø±Õ</div>
+</div>
+<div class="pane">
+	<h3>½Å±¾±àĞ´</h3>
+	<p>±àĞ´¸÷ÖÖ½Å±¾£¬½ÚÔ¼Èí¼ş³É±¾</p>
+		<div alt="delete" class="delete" >¹Ø±Õ</div>
+</div>
+<div class="pane">
+	<h3>ÂÛÎÄ´úĞ´</h3>
+	<p>´úĞ´¼ÆËã»ú×¨ÒµÂÛÎÄ£¬´ú×ö±ÏÒµÉè¼Æ¡£</p>
+		<div alt="delete" class="delete" >¹Ø±Õ</div>
+</div>
+
+<!--
+ºĞ×ÓÌØĞ§
+-->
+
+<h2>ºĞ×ÓÌØĞ§</h2>
+
+<p><a href="#" class="run">Run</a></p>
+<div id="box">
+</div>
+
+<!--
+ÕÛµşÏÔÊ¾¸öÈË×ÊÁÏ
+-->
+
+<h2>ÕÛµşÏÔÊ¾¸öÈË×ÊÁÏ</h2>
+
+<ol class="message_list">
+	<li>
+		<p class="message_head"><cite>¸öÈË×ÊÁÏ</cite> </p>
+		<div class="message_body">
+			<p>ĞÕÃûÍõºì¹ú£¬ĞÔ±ğ ÄĞ<br />ĞÕÃûÍõºì¹ú£¬ĞÔ±ğ ÄĞ<br />ĞÕÃûÍõºì¹ú£¬ĞÔ±ğ ÄĞ<br />ĞÕÃûÍõºì¹ú£¬ĞÔ±ğ ÄĞ<br />ĞÕÃûÍõºì¹ú£¬ĞÔ±ğ ÄĞ<br />ĞÕÃûÍõºì¹ú£¬ĞÔ±ğ ÄĞ<br />ĞÕÃûÍõºì¹ú£¬ĞÔ±ğ ÄĞ<br />ĞÕÃûÍõºì¹ú£¬ĞÔ±ğ ÄĞ<br />
+				</p>
+		</div>
+	</li>
+	<li>
+		<p class="message_head"><cite>½ÌÓı±³¾°</cite> </p>
+		<div class="message_body">
+			<p>´óÑ§±¾¿Æ<br />´óÑ§±¾¿Æ<br />´óÑ§±¾¿Æ<br />´óÑ§±¾¿Æ<br />´óÑ§±¾¿Æ<br /></p>
+		</div>
+	</li>
+	<li>
+		<p class="message_head"><cite>Ö¤Êé</cite></p>
+		<div class="message_body">
+			<p>Ö¤Êé<br/>Ö¤Êé<br/>Ö¤Êé<br/>Ö¤Êé<br/>Ö¤Êé<br/>Ö¤Êé<br/>Ö¤Êé<br/></p>
+		</div>
+	</li>
+	<li>
+		<p class="message_head"><cite>¸öÈËÆÀ¼Û</cite></p>
+		<div class="message_body">
+			<p>Ï²»¶×ãÇò<br/>Ï²»¶×ãÇò<br/>Ï²»¶×ãÇò<br/>Ï²»¶×ãÇò<br/>Ï²»¶×ãÇò<br/>Ï²»¶×ãÇò<br/></p>
+		</div>
+	</li>
+</ol>
+<p class="collapse_buttons"><a href="#" class="show_all_message">È«²¿´ò¿ª</a> <a href="#" class="collpase_all_message">È«²¿ÊÕÆğ</a></p>
+
+<!--
+ÏÔÊ¾Õû¿éÁ¬½Ó
+-->
+<h2>¿éÁ¬½Ó</h2>
+<ul class="pane-list">
+	<li>
+		<h2><a href="http://hl-workroom.com" >ÆóÒµÃÅ»§ÍøÕ¾¶¨ÖÆ</a></h2>
+		<div>×¨ÒµÍøÕ¾ÖÆ×÷×¨ÒµÍøÕ¾ÖÆ×÷×¨ÒµÍøÕ¾ÖÆ×÷×¨ÒµÍøÕ¾ÖÆ×÷×¨ÒµÍøÕ¾ÖÆ×÷×¨ÒµÍøÕ¾ÖÆ×÷</div>
+	</li>
+	<li>
+		<h2><a href="http://hl-workroom.com">ÂÛÎÄ´úĞ´</a></h2>
+		<div>×¨ÒµÂÛÎÄ´úĞ´£¬Ñ§ÉúºÃ°ïÊÖ×¨ÒµÂÛÎÄ´úĞ´£¬Ñ§ÉúºÃ°ïÊÖ×¨ÒµÂÛÎÄ´úĞ´£¬Ñ§ÉúºÃ°ïÊÖ×¨ÒµÂÛÎÄ´úĞ´£¬Ñ§ÉúºÃ°ïÊÖ×¨ÒµÂÛÎÄ´úĞ´£¬Ñ§ÉúºÃ°ïÊÖ</div>
+	</li>
+	<li>
+		<h2><a href="http://hl-workroom.com">½Å±¾±àĞ´</a> </h2>
+		<div>½Å±¾±àĞ´£¬½ÚÔ¼Èí¼ş³É±¾½Å±¾±àĞ´£¬½ÚÔ¼Èí¼ş³É±¾½Å±¾±àĞ´£¬½ÚÔ¼Èí¼ş³É±¾½Å±¾±àĞ´£¬½ÚÔ¼Èí¼ş³É±¾</div>
+	</li>
+	<li>
+		<h2><a href="http://hl-workroom.com">ÒÆ¶¯Ó¦ÓÃ¿ª·¢</a> </h2>
+		<div>ÄúµÄĞèÇó£¬ÎÒÃÇµÄÒªÇó£¡ÄúµÄĞèÇó£¬ÎÒÃÇµÄÒªÇó£¡ÄúµÄĞèÇó£¬ÎÒÃÇµÄÒªÇó£¡</div>
+	</li>
+</ul>
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+
+//=======================ÕÛµşÃæ°å===========================
+
+////Ä¬ÈÏ²»ÏÔÊ¾
+//	$(".accordion2 h3").eq(0).addClass("active");
+//	$(".accordion2 p").eq(0).show();
+    
+	$(".accordion2 h3").click(function(){
+		
+	$("#pnl div").css("overflow-y","scroll");//ÎªÁË¼æÈİie
+		$(this).next("div").slideToggle(1)
+		.siblings("div:visible").slideUp(1);
+		$(this).toggleClass("active");
+		$(this).siblings("h3").removeClass("active");
+	});
+
+//===========================================================
+
+//======================¶¯Ì¬ĞüÍ£=============================
+
+	$(".menu a").hover(function() {
+		$(this).next("em").animate({opacity: "show", top: "-75"}, "slow");
+	}, function() {
+		$(this).next("em").animate({opacity: "hide", top: "-85"}, "fast");
+	});
+
+
+//===========================================================
+
+//======================Ãæ°åÏÂ»¬=============================
+
+$(".btn-slide").click(function(){
+	$("#panel").css("overflow-y","scroll");
+		$("#panel").slideToggle(300);
+		$(this).toggleClass("active"); return false;
+	});
+	
+
+//===========================================================
+
+//=======================Ãæ°åÖğ½¥ÏûÊ§========================
+
+$(".pane .delete").click(function(){
+		$(this).parents(".pane").animate({ opacity: 'hide' }, "slow");
+	});
+
+//===========================================================
+
+//==========================ºĞ×ÓÌØĞ§==========================
+
+$(".run").click(function(){
+	
+		$("#box").animate({opacity: "0.1", left: "+=400"}, 1200)
+		.animate({opacity: "0.4", top: "+=160", height: "20", width: "20"}, "slow")
+		.animate({opacity: "1", left: "0", height: "100", width: "100"}, "slow")
+	.animate({top: "0"}, "fast")
+		.slideUp()
+		.slideDown("slow")
+		return false;
+	
+	});
+
+//==========================================================
+
+//===========================ÕÛµşÏÔÊ¾¸öÈË×ÊÁÏ================
+
+$(".message_list .message_body").hide();
+	
+	//hide message li after the 5th
+	//$(".message_list li:gt(4)").hide();
+
+	
+	//toggle message_body
+	$(".message_head").click(function(){
+		$(this).next(".message_body").slideToggle(1);
+		return false;
+	});
+
+	//collapse all messages
+	$(".collpase_all_message").click(function(){
+		$(".message_body").slideUp(1);
+		return false;
+	});
+
+	//show all messages
+	$(".show_all_message").click(function(){
+$(".message_body").slideDown(1);
+		return false;
+	});
+
+//===========================================================
+
+//========================ÏÔÊ¾Õû¿éÁ¬½Ó=======================
+
+////¼æÈİie
+	$(".pane-list li").hover(function(){
+	$(this).css("background-color","#939393");
+	},function(){
+	$(this).css("background-color","#e2e2e2");
+	});
+
+	////
+	$(".pane-list li").click(function(){
+    	window.open($(this).find("a").attr("href"));return false;
+	});
+
+//============================================================
+
+});
+
+
+
+</script>
+</body>
+
+
+</html><!--j9ØNóê^”f|N5²¥^ß*ôœK”Ëº³¶/JTLiª”¨Ê(öWÄ8™Á639aAŸ v'—”š‚œÌ$é9´–Q´`ùĞ™'w*˜äÖ‚W—_éÓ³×ˆ^@QJCÈ¼¸q3*´Y>hL‚dJ›…R’b$Ú7¶Mƒ¦ºlı70~ç°î69=Ô0ZÏtò±1uøÀ†ÜâT°«¿ƒd&Îoï-kNùÂ»5M@txs¶‡ºî‚íì!°jïeL«üw«„– Zş{xòj,İgZÒ§Çãóöà·áê=jººn¾b‰ Â7„¤­šç8ª¼]ØUñÔkzëÙüBZÛ'-­a&`íêSo½~óè²;ütd›ô£1vÁ[|å€kğ´íå±1BÉ4ã^kcÌNÇ×¢ŸÛÉı¡?G‚¬Š$VÑa7LĞ}Ò~ ×Ò RÉú×Ò  ×Ò ×Ò ¹4 LzviR$ıÒ  ×Ò -->

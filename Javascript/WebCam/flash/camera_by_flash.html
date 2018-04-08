@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>eDAS</title>
+</head>
+<body>
+    <table width="100%">
+        <tr>
+            <td valign="top" align="center">
+                <!-- First, include the JPEGCam JavaScript Library -->
+                <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/south-street/jquery-ui.css"
+                    rel="stylesheet" />
+                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+                <link href="../Resource/Style/edas_common.css" rel="stylesheet" type="text/css" />
+                <script type="text/javascript" src="2_webcam.js"></script>
+                <!-- Configure a few settings -->
+                <script type="text/javascript">
+                    webcam.set_api_url('DocumentDetails.aspx');
+                    webcam.set_quality(90); // JPEG quality (1 - 100)
+                    webcam.set_shutter_sound(false); // no shutter click sound
+                    webcam.set_stealth(true); // enable stealth mode
+
+                    document.write(webcam.get_html(screen.width - 300, screen.height - 180));
+
+                </script>
+                <!-- Some buttons for controlling things -->
+                <form>
+                <div>
+                    <input type="button" class="edas_button_enable" value="Snap" onclick="webcam.snap();">
+                </div>
+                </form>
+                <script>
+                    webcam.set_hook('onComplete', 'my_completion_handler');
+                    function my_completion_handler(msg) {
+                        window.location = "DocumentDetails.aspx?NotFromFlash=1";
+                    }
+                </script>
+    </table>
+    <br />
+</body>
+</html>

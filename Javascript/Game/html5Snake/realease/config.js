@@ -1,0 +1,1 @@
+var screenWidth=800,screenHeight=500,unitSize=20,initSize=3,screenLeft=0,screenTop=0,snakeArr=new Array(),food,snakeColor="#009999",direction,screenColor="#99CCFF",lineColor="#ffffff",lineWidth=3,foodColor="#FFCC00",fontColor="#996600",fontSize=300,timer,sleepTime=200,level=0,score=0,currentPlayer,gameStatus=0

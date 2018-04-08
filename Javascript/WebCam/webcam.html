@@ -1,0 +1,84 @@
+<html>
+<body>
+<div id="pnlFile">
+<input type="file" accept="video/*;capture=camcorder" id="btnFile" onchange='choosedFile(event);'/>
+<canvas id="capturedPhoto" width="640" height="480"></canvas>
+</div>
+
+<div id="pnlVideo">
+	<video id="video" width="640" height="480" autoplay></video>
+<button id="snap" >Snap Photo</button>
+<canvas id="canvas" width="640" height="480"></canvas>
+</div>
+
+
+
+<script>
+
+// Grab elements, create settings, etc.
+
+
+
+
+// Elements for taking the snapshot
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var video = document.getElementById('video');
+
+// Trigger photo take
+document.getElementById("snap").addEventListener("click", function() {
+	context.drawImage(video, 0, 0, 640, 480);
+});
+function choosedFile(evt) {
+	var fileInput = evt.target.files;
+
+                if (fileInput.length > 0) {
+				
+                   var windowURL = window.URL || window.webkitURL;
+                //picture url
+                var picURL = windowURL.createObjectURL(fileInput[0]);
+                //get canvas
+                var photoCanvas = document.getElementById("capturedPhoto");
+                var ctx = photoCanvas.getContext("2d");
+
+                //create image
+                var photo = new Image();
+
+                photo.onload = function () {
+                    //draw photo into canvas when ready
+                    ctx.drawImage(photo, 0, 0, 200, 150);
+                };
+
+                //load photo into canvas
+                photo.src = picURL;
+
+                var picURL2 = picURL.replace("https://www.snic.solutions/uat_bcms/smrtwecare", "");
+                picURL2 = picURL2.replace("https://www.snic.solutions/", "");
+				alert(picURL2);
+                //release object url
+                windowURL.revokeObjectURL(picURL2);
+                }else{
+					alert("no image found");
+				}
+				alert("done");
+	
+}
+
+// Get access to the camera!
+if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    //document.getElementById("pnlFile").style.display = "none";
+    // Not adding `{ audio: true }` since we only want video now
+    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+        video.src = window.URL.createObjectURL(stream);
+        video.play();
+    });
+}
+else{
+	document.getElementById("pnlVideo").style.display = "none";
+}
+
+
+</script>
+
+</body>
+</html>

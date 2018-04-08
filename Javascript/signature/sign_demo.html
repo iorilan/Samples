@@ -1,0 +1,128 @@
+<html>
+<head >
+    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/south-street/jquery-ui.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="jquery.signature.js"></script>
+    <script type="text/javascript" src="jSignature.min.js"></script>
+</head>
+<style >
+
+/*Signature*/
+.kbw-signature { width: 500px; height: 250px; border: 1px solid #000000;}
+
+#signature
+{
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    padding: 0;
+    border: 1px solid;
+}
+
+#signature_box
+{
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+#signature_container
+{
+    width: 400px;
+    height: 140px;
+    border: 3 solid #000000;
+    padding: 0;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+#clear_signature
+{
+    font-weight: 100;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+</style>
+
+
+<body>
+<div id="signature_container" onclick="sigflyout();">
+                                                </div>
+												
+						<span>Client's Signature</span> 
+						<span id="clear_signature" onclick="clearsig();">Clear</span>
+						
+						<div id="signature_flyout" style="display: none; z-index: 1000; position: absolute;
+                background-color: white; left: 30%; top: 35%;">
+                <div id="sig" >
+                </div>
+                <br />
+                <div style="float: right">
+                    <input type="button" value="Clear" id="clear" />
+                    <input type="button" value="Done" id="toimg" />
+                </div>
+            </div>
+            <div id="div_signature_background" style="position: fixed; display: none; left: 0;
+                right: 0; top: 0; bottom: 0; z-index: 10; background-color: grey; opacity: 0.4">
+            </div>
+</body>
+<script>
+
+ (function initS() {
+
+                    var currentData = $("#hdnSignatureData").val();
+                    if (currentData) {
+                        document.getElementById("signature_container").innerHTML =
+				'&nbsp;&nbsp;<img width=200 height=100 src="data:image/png;base64,' + currentData + '" >';
+                    }
+
+                    $("#sig").signature();
+                    $("#clear").click(function () {
+                        $("#sig").signature("reinit");
+                        $("#hdnSignatureData").val("");
+
+                        //$('#sig').signature();
+                    });
+                    $("#toimg").click(function () {
+                        //alert($('#sig').signature('toImage'));
+                        var imgBytes = $("#sig").signature("toImage");
+
+                        document.getElementById("signature_container").innerHTML =
+				'&nbsp;&nbsp;<img width=200 height=100 src="data:image/png;base64,' + imgBytes + '" >';
+                        $("#hdnSignatureData").val(imgBytes);
+
+                        $("#sig").signature("reinit");
+
+                        closesigflyout();
+
+                        $("#edas_loading_background").show();
+                        $("#edas_loading_img").show();
+                        
+                        //__doPostBack("FinishSignature", '');
+                    });
+
+                })();
+
+                function sigflyout() {
+
+                    $('#signature_flyout').show();
+                    $("#div_signature_background").show();
+                }
+
+                function closesigflyout() {
+                    $("#signature_flyout").hide();
+                    $("#div_signature_background").hide();
+                }
+
+                function clearsig() {
+                    document.getElementById("signature_container").innerHTML = "";
+                    $("#hdnSignatureData").val("");
+                }
+
+</script>
+</html>

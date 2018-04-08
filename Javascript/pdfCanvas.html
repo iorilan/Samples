@@ -1,0 +1,42 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+
+
+<canvas id="myCanvas" width="578" height="200"></canvas>
+<button id="download">download</button>
+
+<script>
+var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');
+
+// draw a blue cloud
+var deltax = 200;
+var deltay = 50;
+var x = 10;
+var y = 50;
+context.beginPath();
+context.moveTo(x,y);
+context.fillStyle = '#E60902';
+context.font = "30px Arial";
+
+context.fillText("Name : ",x,y);
+context.fillText("iori",x+deltax,y);
+
+context.fillText("Passport : ",x,y+deltay);
+context.fillText("E0293784",x+deltax,y+deltay);
+
+context.fillText("Ticket # : ",x,y+2*deltay);
+context.fillText("A8394",x+deltax,y+2*deltay);
+
+context.fillText("Date : ",x,y+3*deltay);
+context.fillText("2017-11-01",x+deltax,y+3*deltay);
+
+
+download.addEventListener("click", function() {
+  // only jpeg is supported by jsPDF
+  var imgData = canvas.toDataURL("image/jpeg", 1.0);
+  var pdf = new jsPDF();
+
+  pdf.addImage(imgData, 'JPEG', 0, 0);
+  pdf.save("download.pdf");
+}, false);
+</script>

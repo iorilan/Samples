@@ -1,0 +1,117 @@
+﻿//1. html
+<canvas id="canvasFile" style="margin-top:15px;" width="500" height="400"></canvas>
+<input type="button" id="btnRedo" value="Re-Draw" class="btn btn-warning"/>
+
+//2. javascript 
+
+
+  var photoW = 400;
+        var photoH = 300;
+        var photo;
+		
+		
+		// logic load image into canvas
+		// ...
+		// e.g. 
+		// photo = new Image();
+        // photo.onload = function() {
+        // draw photo into canvas when ready
+        // ctx.drawImage(photo, 0, 0, photoW, photoH);
+        // };
+	    // load photo into canvas
+        // photo.src = picURL;
+		
+		
+		
+		
+ // canvas highlight
+        var canvas = document.getElementById('canvasFile'),
+            ctx = canvas.getContext('2d'),
+            img = new Image;
+        var btnDone = document.getElementById('btnDone');
+        var btnRedo = document.getElementById('btnRedo');
+
+        ctx.strokeStyle = '#FF0000';
+
+
+        function DrawDot(x, y) {
+            var centerX = x;
+            var centerY = y;
+            var radius = 2;
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+            ctx.fillStyle = 'red';
+            ctx.fill();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#FF0000';
+            ctx.stroke();
+        }
+
+        function startDrawing() {
+            ctx.drawImage(img, 0, 0, photoW, photoH);
+            canvas.onmousemove = mousemoving;
+            canvas.onmousedown = mousedownhandle;
+            canvas.onmouseup = mouseuphandle;
+            // ## mobile events
+            //touchstart – to toggle drawing mode “on”
+            //touchend – to toggle drawing mode “off”
+            //touchmove – to track finger position, used in drawing
+            canvas.addEventListener('touchmove', touchmove, false);
+            canvas.addEventListener('touchend', mouseuphandle, false);
+
+            btnRedo.onclick = function (e) {
+                ctx.clearRect(0, 0, ctx.width, ctx.height);
+                ctx.drawImage(photo, 0, 0, photoW, photoH);
+                savedrawing();
+            }
+        }
+        function savedrawing(e) {
+            var image = document.getElementById('canvasFile').toDataURL("image/jpeg");
+            image = image.replace('data:image/jpeg;base64,', '');
+            $("#imgNric1").val(image);
+        };
+
+
+        function mousemoving(e) {
+            if (drawing) {
+                mousedownhandle(e);
+            }
+        }
+
+        var drawing = false;
+
+        function mousedownhandle(e) {
+            drawing = true;
+            var r = canvas.getBoundingClientRect(),
+                x = e.clientX - r.left,
+                y = e.clientY - r.top;
+
+
+            DrawDot(x, y);
+        }
+
+        function mouseuphandle(e) {
+            savedrawing();
+            e.preventDefault();
+            drawing = false;
+            
+        }
+
+
+        //// mobile touch events
+        function touchmove(e) {
+            if (e.clientX > 800) {
+                mousedownhandle(e);
+                return;
+            }
+
+
+            var r = canvas.getBoundingClientRect(),
+                //event.changedTouches[0].pageX + ":" + event.changedTouches[0].pageY;
+                x = e.changedTouches[0].pageX - r.left,
+                y = e.changedTouches[0].pageY - r.top;
+
+            DrawDot(x, y);
+            e.preventDefault();
+        }

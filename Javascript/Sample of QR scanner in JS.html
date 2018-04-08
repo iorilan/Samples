@@ -1,0 +1,45 @@
+﻿//need to reference instascan ： https://github.com/schmich/instascan
+
+//1. html
+<video id="preview" width="500" height="500"></video>
+<input type="text" class="form-control" id="txtScannedQR" style="display: none" placeholder="Scan Result" name="AssetTag"/>
+
+//2. javascript 
+
+ <script src="~/Scripts/instascan.min.js"></script>
+
+    <script type="text/javascript">
+        function checkQR() {
+            return $("#txtScannedQR").val() != "";
+        }
+
+        var scanner = new Instascan.Scanner(
+            {
+                video: document.getElementById('preview') 
+            });
+        scanner.addListener('scan', function (content) {
+            $("#txtScannedQR").val(content);
+            alert(content);
+            
+        });
+        Instascan.Camera.getCameras().then(function (cameras) {
+            
+            // on mobile pick the rear camera
+            if (cameras.length > 1) {
+                scanner.start(cameras[1]);
+            }
+            else if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+            } else {
+                console.error('No cameras found.');
+            }
+        }).catch(function (e) {
+            console.error(e);
+        });
+    </script>
+}
+
+
+//3. if facing running error :
+//getusermedia() no longer works on insecure origins. to use this feature, you should consider switching your application to a secure origin, such as https
+//need to open 443 port on web server and install certificate

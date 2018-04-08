@@ -1,0 +1,21 @@
+<html>
+<head>
+<script src="jquery-1.6.js"></script>
+</head>
+<body>
+<div>
+<ul>
+<li>parentItem1
+	<ul>
+	<li>childItem1.1</li>
+	<li>childItem1.2</li>
+	<li>childItem1.3</li>
+	</ul>
+</li>
+<li>parentItem2</li>
+<li>parentItem3</li>
+<li>parentItem4</li>
+</ul>
+</div>
+</body>
+</html>
